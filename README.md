@@ -8,18 +8,44 @@ Classes:
 _____________________________________________
 Livro 
 
-titulo:
-ano:
-autor:
-tipo:
-genero:
-num_paginas:
-status:
+titulo: str
+ano: int
+autor: str
+tipo: boolean
+genero: str
+num_paginas: int
+status: boolean
 
 CRUD()
 alterar_status()
 data_inicio()
-data_término()
+data_termino()
+
 _____________________________________________
 Relatorio
 
+Livro: objeto
+
+gerar_rela()
+gerar_percen()
+gerar_media()
+gerar_top5()
+genero_fav()
+
+_____________________________________________
+Anotacao
+
+texto: str
+data: int
+trecho: str
+Livro: objeto
+
+criar_nota()
+listar_nota()
+
+_____________________________________________
+Filtro
+
+Livro: objeto
+
+filtrar()
