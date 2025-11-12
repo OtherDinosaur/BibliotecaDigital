@@ -18,3 +18,25 @@ class Anotacao
         self.data = 
         self.trecho = 
         self.livro = 
+
+    def criar_nota(self,livro,texto)
+
+class Relatorio
+    def __init__(self,Livro)
+        self.Livro = livro
+
+    def gerar_rela(self)
+
+    def gerar_percen(self)
+
+    def gerar_media(self)
+
+    def gerar_top5(self)
+
+    def genero_fav(self)
+
+class Filtro
+    def __init__(self,Livro)
+        self.Livro = livro
+    
+    def filtrar(self)
