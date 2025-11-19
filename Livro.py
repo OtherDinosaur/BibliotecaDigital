@@ -29,4 +29,3 @@ class Livro:
         self.status = status
 
     def CRUD(self,comando):
-            
