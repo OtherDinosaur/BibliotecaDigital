@@ -3,7 +3,11 @@ class Relatorio:
     Classe para gerar os relatórios e suas características
     """
     def __init__(self,livro):
-        self.livro = livro
+        self.__livro = livro
+
+    @property
+    def livro(self):
+      return self.__livro
 
     def gerar_rela(self):
 
