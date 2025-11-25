@@ -2,11 +2,10 @@ class Livro:
     """
     Classe para armazenar os livros e suas características
     """
-    def __init__(self,titulo,ano,autor,tipo,genero,num_paginas,status):
+    def __init__(self,titulo,ano,autor,genero,num_paginas,status):
         self.__titulo = titulo
         self.__ano = ano
         self.__autor = autor
-        self.tipo = tipo
         self.genero = genero
         self.num_paginas = num_paginas
         self.status = status
