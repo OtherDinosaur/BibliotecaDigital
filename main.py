@@ -11,7 +11,7 @@ print("bem vindo ao menu da Biblioteca Digital mágica: selecione uma das funç�
 "5 - Alterar Status de leitura" \
 "6 - Buscar Filtros" \
 "7 - Visualizar relatórios")
-opcao = input()
+opcao = int(input())
 
-if opcao = 1:
+if opcao == 1:
     print("")
