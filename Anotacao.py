@@ -1,5 +1,5 @@
 class Anotacao:
-     """
+    """
     Classe para criar as anotações dos livros e suas características
     """
     def __init__(self,texto,data,trecho,livro):

@@ -5,6 +5,29 @@ O aplicativo consistirá em uma Biblioteca digital para controle de leitura do u
 
 ## Classes: 
 
+### Publicação
+
+titulo: str
+
+ano: int
+
+autor: str
+
+genero: str
+
+num_paginas: int
+
+status: boolean
+
+CRUD()
+
+alterar_status()
+
+data_inicio()
+
+data_termino()
+
+_____________________________________________
 ### Livro 
 
 titulo: str
@@ -13,7 +36,28 @@ ano: int
 
 autor: str
 
-tipo: boolean
+genero: str
+
+num_paginas: int
+
+status: boolean
+
+CRUD()
+
+alterar_status()
+
+data_inicio()
+
+data_termino()
+
+_____________________________________________
+### Revista
+
+titulo: str
+
+ano: int
+
+autor: str
 
 genero: str
 
