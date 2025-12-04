@@ -1,7 +1,8 @@
-import Livro
+from Livro import Livro
+import json
 from datetime import date
 
-livro = []
+
 
 print("Bom dia")
 
@@ -21,9 +22,9 @@ if opcao == 1:
     "2 - remover livro" \
     "3 - visualizar livro" \
     "4 - alterar informações de livro")
-    opcao1 = input()
+    opcao1 = int(input())
     if opcao1 == 1:
-        titulo = input("Digite o título da obra: ")
+        titulo = input("1Digite o título da obra: ")
         autor = input("Digite o autor da obra: ")
         ano = input("Digite o ano da publicação")
         genero = input("Digite o gênero da obra")
@@ -37,5 +38,7 @@ if opcao == 1:
             status = False
         else:
             status = True
-        id += 1
-        Livro(titulo,ano,autor,genero,num_paginas,status)
+        livro = Livro(titulo,ano,autor,genero,num_paginas,status)
+
+        with open('Livros.json', 'w', encoding='utf-8') as f:
+            json.dump(livro.__dict__, f, ensure_ascii=False, indent=4)

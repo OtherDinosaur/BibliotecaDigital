@@ -14,13 +14,30 @@ class Publicacao:
     def titulo(self):
         return self.__titulo
     
+    @titulo.setter
+    def titulo(self,titulo):
+        self.__titulo = titulo
+    
     @property
     def ano(self):
         return self.__ano
     
+    @ano.setter
+    def ano(self,ano):
+        try:
+            ano = int(ano)
+            self.__ano = ano 
+        except ValueError:
+            raise ValueError("O ano deve ser um número inteiro.")
+            
+    
     @property
     def autor(self):
         return self.__autor
+    
+    @autor.setter
+    def autor(self,autor):
+        self.__autor = autor
     
     
 
