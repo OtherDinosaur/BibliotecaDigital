@@ -1,0 +1,7 @@
+[project]
+name = "BibliotecaDigital"
+version = "0.1.0"
+description = "Bilblioteca para armazenar status de leitura"
+authors = [
+    {name = "Dorian",email = "dorian.dayvid@aluno.ufca.edu.br"}
+]
