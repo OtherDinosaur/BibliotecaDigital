@@ -19,3 +19,6 @@ class LivroPub(BaseModel):
     data_in: int
     data_ter: Optional[int] = None
     status: bool
+
+class LivroList(BaseModel):
+    livros: list[LivroPub] 
