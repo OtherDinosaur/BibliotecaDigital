@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from datetime import date
-from database import Base
+from .database import Base
 
 
-class Car(Base):
+class Livro(Base):
     __tablename__ = 'livros'
 
     id = Column(Integer, primary_key=True, index=True)
