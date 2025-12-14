@@ -2,12 +2,14 @@ class Publicacao:
     """
     Classe para armazenar publicações e suas características
     """
-    def __init__(self,titulo,ano,autor,genero,num_paginas,status):
+    def __init__(self,titulo,ano,autor,genero,num_paginas,data_in,data_ter,status):
         self.titulo = titulo
         self.ano = ano
         self.autor = autor
         self.genero = genero
         self.num_paginas = num_paginas
+        self.data_in = data_in
+        self.data_ter = data_ter
         self.status = status
 
     @property
