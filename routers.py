@@ -1,8 +1,7 @@
 from fastapi import APIRouter, status
-from sqlalchemy import Session
 
 router = APIRouter(
-    prefix='/api/v1/Bilbioteca',
+    prefix='/api/Bilbioteca',
     tags=['Biblioteca'],
 )
 
