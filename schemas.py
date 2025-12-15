@@ -20,5 +20,14 @@ class LivroPub(BaseModel):
     data_ter: Optional[int] = None
     status: bool
 
+class LivroUpdate(BaseModel):
+    titulo: Optional[str] = None
+    autor: Optional[str] = None
+    ano: Optional[int] = None
+    genero: Optional[str] = None
+    data_in: Optional[int] = None
+    data_ter: Optional[int] = None
+    status: Optional[bool] = None
+
 class LivroList(BaseModel):
     livros: list[LivroPub] 

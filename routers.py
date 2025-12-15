@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status, HTTPException
-from .schemas import LivroSchema, LivroPub, LivroList
+from .schemas import LivroSchema, LivroPub, LivroList, LivroUpdate
 from .database import get_session
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -28,6 +28,36 @@ def listaLivros(session: Session = Depends(get_session), offset: int = 0, limit:
 def mostraLivro(livro_id: int, session: Session = Depends(get_session)):
    livro = session.get(Livro, livro_id)
    if not livro:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Livro não encontrado')
+   return livro
 
-      return { 'erro': 'Livro não encontrado' }
+@router.delete('/{livro_id}', status_code=status.HTTP_204_NO_CONTENT)
+def deletaLivro(livro_id: int, session: Session = Depends(get_session)):
+   livro = session.get(Livro, livro_id)
+   if not livro:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Livro não encontrado')
+   session.delete(livro)
+   session.commit()
+   return
+
+@router.put('/{livro_id}', response_model=LivroPub, status_code=status.HTTP_201_CREATED)
+def atualizaLivro(livro_id: int, livro_at: LivroSchema, session: Session = Depends(get_session)):
+   livro = session.get(Livro, livro_id)
+   if not livro:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Livro não encontrado')
+   for key, value in livro_at.model_dump().items():
+      setattr(livro, key, value)
+   session.commit()
+   session.refresh(livro)
+   return livro
+
+@router.patch('/{livro_id}/status', response_model=LivroPub, status_code=status.HTTP_200_OK)
+def atualizaStatusLivro(livro_id: int, livro_at: LivroUpdate, session: Session = Depends(get_session)):
+   livro = session.get(Livro, livro_id)
+   if not livro:
+      raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Livro não encontrado')
+   for key, value in livro_at.model_dump(exclude_unset=True).items():
+      setattr(livro, key, value)
+   session.commit()
+   session.refresh(livro)
    return livro
