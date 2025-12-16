@@ -61,3 +61,4 @@ def atualizaStatusLivro(livro_id: int, livro_at: LivroUpdate, session: Session =
    session.commit()
    session.refresh(livro)
    return livro
+
