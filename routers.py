@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException, Form
 from .schemas import LivroSchema, LivroPub, LivroList, LivroUpdate
 from .database import get_session
 from sqlalchemy import select
@@ -61,4 +61,20 @@ def atualizaStatusLivro(livro_id: int, livro_at: LivroUpdate, session: Session =
    session.commit()
    session.refresh(livro)
    return livro
+
+@router.post('/form', response_model=LivroPub, status_code=status.HTTP_201_CREATED)
+def criaLivrosForm(
+    titulo: str = Form(...),
+    autor: str = Form(...),
+    ano: int = Form(...),
+    genero: str = Form(...),
+    data_in: int = Form(...),
+    status: bool = Form(...),
+    session: Session = Depends(get_session)
+):
+    livro = Livro(titulo=titulo, autor=autor, ano=ano, genero=genero, data_in=data_in, status=status)
+    session.add(livro)
+    session.commit()
+    session.refresh(livro)
+    return livro
 
