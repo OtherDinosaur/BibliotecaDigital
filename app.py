@@ -41,3 +41,38 @@ def deletar_livro(livro_id: int, id: int = Form(...), session: Session = Depends
         session.delete(livro)
         session.commit()
     return RedirectResponse(url="/", status_code=303)
+
+@app.get("/livros/editar/{livro_id}")
+def editar_livro_form(request: Request, livro_id: int, session: Session = Depends(get_session)):
+    livro = session.get(Livro, livro_id)
+    if not livro:
+        return RedirectResponse(url="/", status_code=303)
+    return templates.TemplateResponse("editar_livro.html", {"request": request, "livro": livro})
+
+@app.post("/livros/editar/{livro_id}")
+def atualizar_livro(
+    livro_id: int,
+    titulo: str = Form(...),
+    autor: str = Form(...),
+    ano: int = Form(...),
+    genero: str = Form(...),
+    data_in: str = Form(...),
+    data_ter: str = Form(None),
+    session: Session = Depends(get_session)
+):
+    livro = session.get(Livro, livro_id)
+    if not livro:
+        return RedirectResponse(url="/", status_code=303)
+    
+    # Atualiza os campos
+    livro.titulo = titulo
+    livro.autor = autor
+    livro.ano = ano
+    livro.genero = genero
+    livro.data_in = data_in
+    livro.data_ter = data_ter
+    # Calcula o status: True (Lido) se data_ter foi preenchida, False (Não Lido) caso contrário
+    livro.status = bool(data_ter and data_ter.strip())
+    
+    session.commit()
+    return RedirectResponse(url="/", status_code=303)

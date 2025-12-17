@@ -33,14 +33,6 @@ def mostraLivro(livro_id: int, session: Session = Depends(get_session)):
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Livro não encontrado')
    return livro
 
-@router.delete('/delete/{livro_id}', status_code=status.HTTP_204_NO_CONTENT)
-def deletar_livro(livro_id: int, session: Session = Depends(get_session)):
-    livro = session.get(Livro, livro_id)
-    if livro:
-        session.delete(livro)
-        session.commit()
-    return RedirectResponse(url="/", status_code=303)
-
 @router.put('/{livro_id}', response_model=LivroPub, status_code=status.HTTP_201_CREATED)
 def atualizaLivro(livro_id: int, livro_at: LivroSchema, session: Session = Depends(get_session)):
    livro = session.get(Livro, livro_id)
@@ -71,10 +63,11 @@ def criaLivrosForm(
     genero: str = Form(...),
     data_in: str = Form(...),
     data_ter: str = Form(None),
-    status: bool = Form(...),
     session: Session = Depends(get_session)
 ):
-    livro = Livro(titulo=titulo, autor=autor, ano=ano, genero=genero, data_in=data_in, data_ter=data_ter, status=status)
+    # Calcula o status: True (Lido) se data_ter foi preenchida, False (Não Lido) caso contrário
+    livro_status = bool(data_ter and data_ter.strip())
+    livro = Livro(titulo=titulo, autor=autor, ano=ano, genero=genero, data_in=data_in, data_ter=data_ter, status=livro_status)
     session.add(livro)
     session.commit()
     session.refresh(livro)
