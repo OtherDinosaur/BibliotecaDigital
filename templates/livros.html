@@ -18,7 +18,10 @@
                     <th>Autor</th>
                     <th>Ano</th>
                     <th>Gênero</th>
+                    <th>Data de Início</th>
+                    <th>Data de Término</th>
                     <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +32,12 @@
                     <td>{{ livro.autor }}</td>
                     <td>{{ livro.ano }}</td>
                     <td>{{ livro.genero }}</td>
+                    <td>{{ livro.data_in }}</td>
+                    <td>{{ livro.data_ter if livro.data_ter else 'N/A' }}</td>
                     <td>{{ 'Lido' if livro.status else 'Não Lido' }}</td>
+                    <td>
+                        <a href="/livros/deletar/{{ livro.id }}" class="btn btn-sm btn-danger">Deletar</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -6,8 +6,8 @@ class LivroSchema(BaseModel):
     autor: str
     ano: int
     genero: str
-    data_in: int
-    data_ter: Optional[int] = None
+    data_in: str
+    data_ter: Optional[str] = None
     status: bool
 
 class LivroPub(BaseModel):
@@ -16,8 +16,8 @@ class LivroPub(BaseModel):
     autor: str
     ano: int
     genero: str
-    data_in: int
-    data_ter: Optional[int] = None
+    data_in: str
+    data_ter: Optional[str] = None
     status: bool
 
 class LivroUpdate(BaseModel):
@@ -25,8 +25,8 @@ class LivroUpdate(BaseModel):
     autor: Optional[str] = None
     ano: Optional[int] = None
     genero: Optional[str] = None
-    data_in: Optional[int] = None
-    data_ter: Optional[int] = None
+    data_in: Optional[str] = None
+    data_ter: Optional[str] = None
     status: Optional[bool] = None
 
 class LivroList(BaseModel):

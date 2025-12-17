@@ -27,8 +27,8 @@ def upgrade() -> None:
     sa.Column('autor', sa.String(), nullable=False),
     sa.Column('ano', sa.Integer(), nullable=False),
     sa.Column('genero', sa.String(), nullable=False),
-    sa.Column('data_in', sa.Integer(), nullable=False),
-    sa.Column('data_ter', sa.Integer(), nullable=True),
+    sa.Column('data_in', sa.String(), nullable=False),
+    sa.Column('data_ter', sa.String(), nullable=True),
     sa.Column('status', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

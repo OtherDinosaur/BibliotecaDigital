@@ -27,8 +27,12 @@
                 <input type="text" class="form-control" id="genero" name="genero" required>
             </div>
             <div class="mb-3">
-                <label for="data_in" class="form-label">Data de Início (timestamp)</label>
-                <input type="number" class="form-control" id="data_in" name="data_in" required>
+                <label for="data_in" class="form-label">Data de Início</label>
+                <input type="date" class="form-control" id="data_in" name="data_in" required>
+            </div>
+            <div class="mb-3">
+                <label for="data_ter" class="form-label">Data de Término</label>
+                <input type="date" class="form-control" id="data_ter" name="data_ter">
             </div>
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
@@ -38,7 +42,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Adicionar</button>
-            <a href="/livros" class="btn btn-secondary">Voltar</a>
+            <a href="/" class="btn btn-secondary">Voltar</a>
         </form>
     </div>
 </body>

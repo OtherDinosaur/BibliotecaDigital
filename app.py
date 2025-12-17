@@ -1,6 +1,7 @@
-from fastapi import Depends, FastAPI, Request
+from fastapi import Depends, FastAPI, Request, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from .routers import router as listaLivros
 from .database import get_session
 from sqlalchemy.orm import Session
@@ -17,11 +18,7 @@ templates = Jinja2Templates(directory="templates")
 
 app.include_router(listaLivros)
 
-@app.get('/')
-def read_root():
-    return {'status': 'ok'}
-
-@app.get("/livros")
+@app.get("/")
 def listar_livros(request: Request, session: Session = Depends(get_session)):
     livros = session.query(Livro).all()
     return templates.TemplateResponse("livros.html", {"request": request, "livros": livros})
@@ -29,3 +26,18 @@ def listar_livros(request: Request, session: Session = Depends(get_session)):
 @app.get("/adicionar-livro")
 def adicionar_livro_form(request: Request):
     return templates.TemplateResponse("adicionar_livro.html", {"request": request})
+
+@app.get("/livros/deletar/{livro_id}")
+def confirmar_delecao(request: Request, livro_id: int, session: Session = Depends(get_session)):
+    livro = session.get(Livro, livro_id)
+    if not livro:
+        return RedirectResponse(url="/", status_code=303)
+    return templates.TemplateResponse("deletar_livro.html", {"request": request, "livro": livro})
+
+@app.post("/livros/deletar/{livro_id}")
+def deletar_livro(livro_id: int, id: int = Form(...), session: Session = Depends(get_session)):
+    livro = session.get(Livro, livro_id)
+    if livro:
+        session.delete(livro)
+        session.commit()
+    return RedirectResponse(url="/", status_code=303)

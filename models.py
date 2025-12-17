@@ -11,6 +11,6 @@ class Livro(Base):
     autor = Column(String, nullable=False)
     ano = Column(Integer, nullable=False)
     genero = Column(String, nullable=False)
-    data_in = Column(Integer, nullable=False)
-    data_ter = Column(Integer, nullable=True)
+    data_in = Column(String, nullable=False)
+    data_ter = Column(String, nullable=True)
     status = Column(Boolean, nullable=False)

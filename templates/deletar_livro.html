@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deletar Livro</title>
+  <style>
+    body{font-family: Inter, Arial, sans-serif;max-width:720px;margin:40px auto;padding:0 16px;color:#222}
+    header{display:flex;align-items:center;justify-content:space-between}
+    h1{font-size:20px;margin:0}
+    .card{border:1px solid #e6e6e6;border-radius:8px;padding:20px;margin-top:20px;background:#fff}
+    .meta{color:#555;margin-top:8px}
+    .actions{margin-top:20px}
+    .danger{background:#d9534f;color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer}
+    .cancel{background:transparent;border:1px solid #ccc;padding:9px 14px;border-radius:6px;margin-left:10px;text-decoration:none;color:#333}
+    .small{font-size:13px;color:#666}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Excluir livro</h1>
+    <a href="/" class="cancel">Voltar à lista</a>
+  </header>
+
+  <div class="card">
+    <p>Tem certeza que deseja <strong>excluir</strong> este livro?</p>
+    <div class="meta">
+      <div><strong>Título:</strong> {{ livro.titulo }}</div>
+      <div class="small">A exclusão é permanente e não poderá ser desfeita.</div>
+    </div>
+
+    <form method="post" action="/livros/deletar/{{ livro.id }}">
+      <input type="hidden" name="id" value="{{ livro.id }}">
+      <div class="actions">
+        <button type="submit" class="danger">Confirmar exclusão</button>
+        <a href="/" class="cancel">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
