@@ -109,3 +109,8 @@ _____________________________________________
 Livro: objeto
 
 filtrar()
+
+_____________________________________________
+### Como executar
+
+Atenção, para executar o sistema, baixe o diretório todo e execute o comando "fastapi dev ./app.py"

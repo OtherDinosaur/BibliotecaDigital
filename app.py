@@ -6,6 +6,7 @@ from .routers import router as listaLivros
 from .database import get_session
 from sqlalchemy.orm import Session
 from .models import Livro
+from .classes.Relatorio import Relatorio
 
 app = FastAPI(
     title='Biblioteca Digital API',
@@ -27,6 +28,21 @@ def listar_livros(request: Request, session: Session = Depends(get_session)):
 def adicionar_livro_form(request: Request):
     return templates.TemplateResponse("adicionar_livro.html", {"request": request})
 
+@app.get("/gerar-relatorio")
+def gerar_relatorio(request: Request, session: Session = Depends(get_session)):
+    livros = session.query(Livro).all()
+    relatorio = Relatorio(livros)
+    dados_relatorio = {
+        "total_livros": relatorio.gerar_rela()["total_livros"],
+        "livros_lidos": relatorio.gerar_rela()["livros_lidos"],
+        "livros_nao_lidos": relatorio.gerar_rela()["livros_nao_lidos"],
+        "percentual": relatorio.gerar_percen(),
+        "media_tempo": relatorio.gerar_media(),
+        "genero_fav": relatorio.genero_fav(),
+        "top5": relatorio.gerar_top5(),
+        "livros": relatorio.gerar_rela()["livros"]
+    }
+    return templates.TemplateResponse("relatorio.html", {"request": request, "relatorio": dados_relatorio})
 @app.get("/livros/deletar/{livro_id}")
 def confirmar_delecao(request: Request, livro_id: int, session: Session = Depends(get_session)):
     livro = session.get(Livro, livro_id)
